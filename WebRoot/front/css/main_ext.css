@@ -1,0 +1,26 @@
+.tree-title {
+	font-size: 14px;
+	color: #003366;
+}
+
+.tree-icon-add {
+	background: url('../images/tree-icon-add.png') no-repeat;
+}
+
+.tree-icon-cut {
+	background: url('../images/tree-icon-cut.png') no-repeat;
+}
+
+#faq_type_tree li {
+	clear: both;
+	float: none;
+}
+
+.tree-node-selected {
+	background: #0081c2;
+	color: #fff !important;
+}
+
+.tree-node-selected .tree-title {
+	color: #fff !important;
+}

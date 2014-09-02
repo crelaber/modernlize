@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mycar.model.dal.sys.ext.SuppBusiQuery">
+
+	<resultMap id="BaseResultMap" type="com.mycar.model.pojo.sys.ext.ViewSuppSearchExt" >
+    <result column="distance" property="distance" jdbcType="DOUBLE" />
+    
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="supp_name" property="suppName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="supp_namepy" property="suppNamepy" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="supp_person" property="suppPerson" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="consumption_per" property="consumptionPer" jdbcType="DOUBLE" />
+    <result column="score_1" property="score1" jdbcType="DOUBLE" />
+    <result column="score_2" property="score2" jdbcType="DOUBLE" />
+    <result column="score_3" property="score3" jdbcType="DOUBLE" />
+    <result column="score_4" property="score4" jdbcType="DOUBLE" />
+    <result column="sitem_1" property="sitem1" jdbcType="VARCHAR" />
+    <result column="sitem_3" property="sitem3" jdbcType="VARCHAR" />
+    <result column="sitem_4" property="sitem4" jdbcType="VARCHAR" />
+    <result column="sitem_2" property="sitem2" jdbcType="VARCHAR" />
+    <result column="score_sum" property="scoreSum" jdbcType="DOUBLE" />
+    <result column="tel_phone" property="telPhone" jdbcType="VARCHAR" />
+    <result column="shop_hours" property="shopHours" jdbcType="VARCHAR" />
+    <result column="sup_info" property="supInfo" jdbcType="VARCHAR" />
+    <result column="other_info" property="otherInfo" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="img_sum" property="imgSum" jdbcType="INTEGER" />
+    <result column="coment_sum" property="comentSum" jdbcType="INTEGER" />
+    <result column="start_sum_1" property="startSum1" jdbcType="INTEGER" />
+    <result column="start_sum_2" property="startSum2" jdbcType="INTEGER" />
+    <result column="start_sum_3" property="startSum3" jdbcType="INTEGER" />
+    <result column="start_sum_4" property="startSum4" jdbcType="INTEGER" />
+    <result column="start_sum_5" property="startSum5" jdbcType="INTEGER" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="search_keyword" property="searchKeyword" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="lon" property="lon" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="search_num" property="searchNum" jdbcType="INTEGER" />
+    <result column="click_num" property="clickNum" jdbcType="INTEGER" />
+    <result column="add_datetime" property="addDatetime" jdbcType="TIMESTAMP" />
+    <result column="update_datetime" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="enable" property="enable" jdbcType="INTEGER" />
+    <result column="net_shop_domain" property="netShopDomain" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="par_area_id" property="parAreaId" jdbcType="VARCHAR" />
+    <result column="par_area_name" property="parAreaName" jdbcType="VARCHAR" />
+    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+    <result column="coupon_val" property="couponVal" jdbcType="DOUBLE" />
+    <result column="coupon_num" property="couponNum" jdbcType="INTEGER" />
+    <result column="vip_id" property="vipId" jdbcType="VARCHAR" />
+    <result column="vip_val" property="vipVal" jdbcType="DOUBLE" />
+    <result column="vip_num" property="vipNum" jdbcType="INTEGER" />
+  </resultMap>
+	
+	<!-- 
+	排序
+	类型
+	 -->
+	
+	<select id="selectViewSuppSearchByExample" resultMap="BaseResultMap"
+		parameterType="com.mycar.model.dal.sys.ext.SuppBusiQuery$Params">
+		select *,
+		
+		sqrt(
+			(
+				((#{lon}-lon)*PI()*12656*cos(((#{lat}+lat)/2)*PI()/180)/180)
+				*
+				((#{lon}-lon)*PI()*12656*cos (((#{lat}+lat)/2)*PI()/180)/180)
+			)
+			+
+			(
+				((#{lat}-lat)*PI()*12656/180)
+				*
+				((#{lat}-lat)*PI()*12656/180)
+			)
+		)  as distance
+		
+		from Gview_SuppSearch 
+		<where>
+			
+			<if test="typeIds != null">
+				and type_id in 
+				<foreach item="item" index="index" collection="typeIds" open="(" separator="," close=")">  
+				 	#{item}
+				</foreach>
+			</if>
+			
+			<if test="parAreaId != null and parAreaId != ''">
+				and par_area_id = #{parAreaId}
+			</if>
+			
+			<if test="lon != null and lon != '' and lat != null and lat != '' and kmScope != null">
+				and sqrt(
+					(
+						((#{lon}-lon)*PI()*12656*cos(((#{lat}+lat)/2)*PI()/180)/180)
+						*
+						((#{lon}-lon)*PI()*12656*cos (((#{lat}+lat)/2)*PI()/180)/180)
+					)
+					+
+					(
+						((#{lat}-lat)*PI()*12656/180)
+						*
+						((#{lat}-lat)*PI()*12656/180)
+					)
+				) 
+				<![CDATA[ < ]]>
+				#{kmScope}
+			</if>
+			
+		</where>
+		
+		<if test="orderByClause != null" >
+	      order by ${orderByClause}
+	    </if>
+	    
+	    <if test="page != null" >
+	      limit #{page.begin} , #{page.length}
+	    </if>
+		
+	</select>
+	
+	<select id="countByExample" resultType="java.lang.Integer"
+		parameterType="com.mycar.model.dal.sys.ext.SuppBusiQuery$Params">
+		select count(id)
+		
+		from Gview_SuppSearch 
+		<where>
+			
+			<if test="typeIds != null">
+				and type_id in 
+				<foreach item="item" index="index" collection="typeIds" open="(" separator="," close=")">  
+				 	#{item}
+				</foreach>
+			</if>
+			
+			<if test="parAreaId != null and parAreaId != ''">
+				and par_area_id = #{parAreaId}
+			</if>			
+			
+			<if test="lon != null and lon != '' and lat != null and lat != '' and kmScope != null">
+				and sqrt(
+					(
+						((#{lon}-lon)*PI()*12656*cos(((#{lat}+lat)/2)*PI()/180)/180)
+						*
+						((#{lon}-lon)*PI()*12656*cos (((#{lat}+lat)/2)*PI()/180)/180)
+					)
+					+
+					(
+						((#{lat}-lat)*PI()*12656/180)
+						*
+						((#{lat}-lat)*PI()*12656/180)
+					)
+				) 
+				<![CDATA[ < ]]>
+				#{kmScope}
+			</if>
+			
+		</where>
+		
+	</select>
+	
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<auto-cfg>
+    <bean name="sysCommonControlAction">
+        <method name="addSysValue">
+            <intercept name="addSysValueCustintercept" position="before"></intercept>
+        </method>
+        <method name="updateSysValue">
+            <intercept name="updateSysValueCustintercept" position="before"></intercept>
+        </method>
+    </bean>
+</auto-cfg>

@@ -1,0 +1,169 @@
+{
+    pojos: [
+        {
+            name: "UrFaqType",
+            packager: "com.uwen.ur.model.pojo.sys",
+            order_by: "sort",
+            date_auto: true,
+            delete_field: {
+                name: "enable",
+                value: "0"
+            },
+            resouces: [
+                
+            ],
+            pks: [
+                {
+                    name: "id",
+                    type: "java.lang.String"
+                }
+            ],
+            fas: [
+                
+            ]
+        },
+		{
+            name: "UrFaq",
+            packager: "com.uwen.ur.model.pojo.sys",
+            order_by: "sort",
+            date_auto: true,
+            delete_field: {
+                name: "enable",
+                value: "0"
+            },
+            resouces: [
+                
+            ],
+            pks: [
+                {
+                    name: "id",
+                    type: "java.lang.String"
+                }
+            ],
+            fas: [
+                
+            ]
+        },
+		{
+            name: "UrFaqFile",
+            packager: "com.uwen.ur.model.pojo.sys",
+            order_by: "sort",
+            date_auto: true,
+            delete_field: {
+                name: "enable",
+                value: "0"
+            },
+            resouces: [
+                
+            ],
+            pks: [
+                {
+                    name: "id",
+                    type: "java.lang.String"
+                }
+            ],
+            fas: [
+                
+            ]
+        },
+		{
+            name: "UrFaqFileRel",
+            packager: "com.uwen.ur.model.pojo.sys",
+            order_by: "sort",
+            date_auto: true,
+            delete_field: {
+                name: "enable",
+                value: "0"
+            },
+            resouces: [
+                
+            ],
+            pks: [
+                {
+                    name: "faqId",
+                    type: "java.lang.String"
+                },
+                {
+                    name: "fileId",
+                    type: "java.lang.String"
+                }
+            ],
+            fas: [
+                
+            ]
+        },
+		{
+            name: "UrFaqImg",
+            packager: "com.uwen.ur.model.pojo.sys",
+            order_by: "sort",
+            date_auto: true,
+            delete_field: {
+                name: "enable",
+                value: "0"
+            },
+            resouces: [
+                
+            ],
+            pks: [
+                {
+                    name: "id",
+                    type: "java.lang.String"
+                }
+            ],
+            fas: [
+                
+            ]
+        },
+		{
+            name: "UrFaqImgRel",
+            packager: "com.uwen.ur.model.pojo.sys",
+            order_by: "sort",
+            date_auto: true,
+            delete_field: {
+                name: "enable",
+                value: "0"
+            },
+            resouces: [
+                
+            ],
+            pks: [
+                {
+                    name: "faqId",
+                    type: "java.lang.String"
+                },
+                {
+                    name: "imgId",
+                    type: "java.lang.String"
+                }
+            ],
+            fas: [
+                
+            ]
+        },
+		
+		{
+            name: "UrFaqInterest",
+            packager: "com.uwen.ur.model.pojo.sys",
+            order_by: "sort",
+            date_auto: true,
+            delete_field: {
+                name: "enable",
+                value: "0"
+            },
+            resouces: [
+                
+            ],
+            pks: [
+                {
+                    name: "id",
+                    type: "java.lang.String"
+                }
+            ],
+            fas: [
+                
+            ]
+        },
+		
+        
+    ]
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="My Application" default="deploy" basedir=".">
+    <!-- default="deploy" 部署到远程服务器的ant脚本,由于缓存的jar被加载到tomcat内存里面,必需先停掉tomcat,然后删掉目录再run -->
+	<!-- Configure the directory into which the web application is built -->
+	<property name="build" value="${basedir}/WebRoot/WEB-INF/classes" />
+	<property name="dist.dir" value="${basedir}/" />
+
+	<!-- Configure the context path for this application -->
+	<property name="path" value="/fol" />
+	
+	<property name="file.name" value="fol.war" />
+
+	<!-- Configure properties to access the Manager application -->
+	<property name="url" value="http://192.168.141.30/manager/" />
+	<property name="username" value="tomcat" />
+	<property name="password" value="tomcat" />
+
+	<!-- Configure the custom Ant tasks for the Manager application -->
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
+	<taskdef name="stop" classname="org.apache.catalina.ant.StopTask" />
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
+    
+	<target name="war" description="package web application">
+        <war destfile="${dist.dir}/${file.name}" webxml="WebRoot/WEB-INF/web.xml">
+            <classes dir="WebRoot/WEB-INF/classes" />
+            <fileset dir="WebRoot" excludes="WEB-INF/**" />
+            <lib dir="WebRoot/WEB-INF/lib" />
+        </war>
+    </target>
+	
+	<target name="deploy" description="Install web application" depends="war,undeploy">
+		<deploy url="${url}" username="${username}" password="${password}" path="${path}" war="${dist.dir}/${file.name}" />
+	</target>
+	<!--
+	<target name="stop" description="Stop web application">
+		<stop url="${url}" username="${username}" password="${password}" path="${path}"/>
+	</target>
+    
+	-->
+	<target name="undeploy" description="Remove web application">
+		<undeploy url="${url}" username="${username}" password="${password}" path="${path}" />
+	</target>
+    
+	<!-- Executable Targets -->
+	<!-- @author 姜玮 -->
+</project>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry location="mysql-connector-java-5.0.3-bin.jar" />
+    <classPathEntry location="mysql-page-plugin-1.0.jar"/>
+     
+    <context id="OracleTables" targetRuntime="MyBatis3">
+        
+        <!-- 
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>  
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+         -->
+        <!-- Pagination 
+        <plugin type="util.OraclePaginationPlugin"></plugin>
+        <plugin type="util.OracleTreegridPlugin"></plugin>
+        
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+		-->
+		<!-- 
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@192.168.141.30:1521:orcl"
+            userId="twra" password="twra">
+        </jdbcConnection>
+		 -->
+		 <plugin type="util.OraclePaginationPlugin"></plugin>
+		 <plugin type="util.OracleTreegridPlugin"></plugin>
+		 <!--<plugin type="util.MysqlPaginationPlugin"></plugin>-->
+        
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@192.168.0.103:1521:sootu"
+            userId="root" password="">
+        </jdbcConnection>  -->
+        
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@192.168.10.122:1521:orcl"
+            userId="bjxd_oracle" password="uWEN123456">
+        </jdbcConnection> 
+		
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.uwen.ur.model.pojo.sys"
+            targetProject="../../java/">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.uwen.ur.model.dal.sys"
+            targetProject="../../java/">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER"
+            targetPackage="com.uwen.ur.model.dal.sys" targetProject="../../java/">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        
+ 		<!-- 配置表名与POJO映射
+			注意Mysql表名需要用（如：gdish_dish_top用（下划线_）分割）
+			表名：gdish_dish_top
+			POJO名称：GdDishTop
+			所有的表依次配置，排序不分先后
+			
+        	<table tableName="gdish_dish_top" domainObjectName="GdDishTop"></table>
+ 		 -->
+		<table tableName="t_ur_faq_type" domainObjectName="UrFaqType"></table>
+		<table tableName="t_ur_faq" domainObjectName="UrFaq"></table>
+		<table tableName="t_ur_faq_file" domainObjectName="UrFaqFile"></table>
+		<table tableName="t_ur_faq_file_rel" domainObjectName="UrFaqFileRel"></table>
+		<table tableName="t_ur_faq_img" domainObjectName="UrFaqImg"></table>
+        <table tableName="t_ur_faq_img_rel" domainObjectName="UrFaqImgRel"></table>
+		<table tableName="t_ur_faq_interest" domainObjectName="UrFaqInterest"></table>
+		
+    </context>
+</generatorConfiguration>

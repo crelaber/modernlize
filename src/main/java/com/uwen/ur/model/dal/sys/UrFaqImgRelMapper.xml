@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uwen.ur.model.dal.sys.UrFaqImgRelMapper" >
+  <resultMap id="BaseResultMap" type="com.uwen.ur.model.pojo.sys.UrFaqImgRel" >
+    <id column="FAQ_ID" property="faqId" jdbcType="VARCHAR" />
+    <id column="IMG_ID" property="imgId" jdbcType="VARCHAR" />
+    <result column="IMG_NAME" property="imgName" jdbcType="VARCHAR" />
+    <result column="IMG_SUFFIX" property="imgSuffix" jdbcType="VARCHAR" />
+    <result column="IMG_REMARK" property="imgRemark" jdbcType="VARCHAR" />
+    <result column="IMG_SIZE" property="imgSize" jdbcType="DECIMAL" />
+    <result column="IMG_UNIT" property="imgUnit" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="ADD_DATETIME" property="addDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="ENABLE" property="enable" jdbcType="DECIMAL" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FAQ_ID, IMG_ID, IMG_NAME, IMG_SUFFIX, IMG_REMARK, IMG_SIZE, IMG_UNIT, CREATE_USER_ID, 
+    CREATE_USER_NAME, UPDATE_USER_ID, UPDATE_USER_NAME, ADD_DATETIME, UPDATE_DATETIME, 
+    ENABLE, SORT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRelExample" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_IMG_REL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRelKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_IMG_REL
+    where FAQ_ID = #{faqId,jdbcType=VARCHAR}
+      and IMG_ID = #{imgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRelKey" >
+    delete from T_UR_FAQ_IMG_REL
+    where FAQ_ID = #{faqId,jdbcType=VARCHAR}
+      and IMG_ID = #{imgId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRelExample" >
+    delete from T_UR_FAQ_IMG_REL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRel" >
+    insert into T_UR_FAQ_IMG_REL (FAQ_ID, IMG_ID, IMG_NAME, 
+      IMG_SUFFIX, IMG_REMARK, IMG_SIZE, 
+      IMG_UNIT, CREATE_USER_ID, CREATE_USER_NAME, 
+      UPDATE_USER_ID, UPDATE_USER_NAME, ADD_DATETIME, 
+      UPDATE_DATETIME, ENABLE, SORT
+      )
+    values (#{faqId,jdbcType=VARCHAR}, #{imgId,jdbcType=VARCHAR}, #{imgName,jdbcType=VARCHAR}, 
+      #{imgSuffix,jdbcType=VARCHAR}, #{imgRemark,jdbcType=VARCHAR}, #{imgSize,jdbcType=DECIMAL}, 
+      #{imgUnit,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateUserName,jdbcType=VARCHAR}, #{addDatetime,jdbcType=TIMESTAMP}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{enable,jdbcType=DECIMAL}, #{sort,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRel" >
+    insert into T_UR_FAQ_IMG_REL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="faqId != null" >
+        FAQ_ID,
+      </if>
+      <if test="imgId != null" >
+        IMG_ID,
+      </if>
+      <if test="imgName != null" >
+        IMG_NAME,
+      </if>
+      <if test="imgSuffix != null" >
+        IMG_SUFFIX,
+      </if>
+      <if test="imgRemark != null" >
+        IMG_REMARK,
+      </if>
+      <if test="imgSize != null" >
+        IMG_SIZE,
+      </if>
+      <if test="imgUnit != null" >
+        IMG_UNIT,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createUserName != null" >
+        CREATE_USER_NAME,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="updateUserName != null" >
+        UPDATE_USER_NAME,
+      </if>
+      <if test="addDatetime != null" >
+        ADD_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="enable != null" >
+        ENABLE,
+      </if>
+      <if test="sort != null" >
+        SORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="faqId != null" >
+        #{faqId,jdbcType=VARCHAR},
+      </if>
+      <if test="imgId != null" >
+        #{imgId,jdbcType=VARCHAR},
+      </if>
+      <if test="imgName != null" >
+        #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSuffix != null" >
+        #{imgSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="imgRemark != null" >
+        #{imgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSize != null" >
+        #{imgSize,jdbcType=DECIMAL},
+      </if>
+      <if test="imgUnit != null" >
+        #{imgUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="addDatetime != null" >
+        #{addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRelExample" resultType="java.lang.Integer" >
+    select count(*) from T_UR_FAQ_IMG_REL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_UR_FAQ_IMG_REL
+    <set >
+      <if test="record.faqId != null" >
+        FAQ_ID = #{record.faqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgId != null" >
+        IMG_ID = #{record.imgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgName != null" >
+        IMG_NAME = #{record.imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgSuffix != null" >
+        IMG_SUFFIX = #{record.imgSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgRemark != null" >
+        IMG_REMARK = #{record.imgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgSize != null" >
+        IMG_SIZE = #{record.imgSize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.imgUnit != null" >
+        IMG_UNIT = #{record.imgUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserId != null" >
+        CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserName != null" >
+        CREATE_USER_NAME = #{record.createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserId != null" >
+        UPDATE_USER_ID = #{record.updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserName != null" >
+        UPDATE_USER_NAME = #{record.updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addDatetime != null" >
+        ADD_DATETIME = #{record.addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enable != null" >
+        ENABLE = #{record.enable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_UR_FAQ_IMG_REL
+    set FAQ_ID = #{record.faqId,jdbcType=VARCHAR},
+      IMG_ID = #{record.imgId,jdbcType=VARCHAR},
+      IMG_NAME = #{record.imgName,jdbcType=VARCHAR},
+      IMG_SUFFIX = #{record.imgSuffix,jdbcType=VARCHAR},
+      IMG_REMARK = #{record.imgRemark,jdbcType=VARCHAR},
+      IMG_SIZE = #{record.imgSize,jdbcType=DECIMAL},
+      IMG_UNIT = #{record.imgUnit,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      CREATE_USER_NAME = #{record.createUserName,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{record.updateUserId,jdbcType=VARCHAR},
+      UPDATE_USER_NAME = #{record.updateUserName,jdbcType=VARCHAR},
+      ADD_DATETIME = #{record.addDatetime,jdbcType=TIMESTAMP},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      ENABLE = #{record.enable,jdbcType=DECIMAL},
+      SORT = #{record.sort,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRel" >
+    update T_UR_FAQ_IMG_REL
+    <set >
+      <if test="imgName != null" >
+        IMG_NAME = #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSuffix != null" >
+        IMG_SUFFIX = #{imgSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="imgRemark != null" >
+        IMG_REMARK = #{imgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSize != null" >
+        IMG_SIZE = #{imgSize,jdbcType=DECIMAL},
+      </if>
+      <if test="imgUnit != null" >
+        IMG_UNIT = #{imgUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        UPDATE_USER_NAME = #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="addDatetime != null" >
+        ADD_DATETIME = #{addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        ENABLE = #{enable,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        SORT = #{sort,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where FAQ_ID = #{faqId,jdbcType=VARCHAR}
+      and IMG_ID = #{imgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRel" >
+    update T_UR_FAQ_IMG_REL
+    set IMG_NAME = #{imgName,jdbcType=VARCHAR},
+      IMG_SUFFIX = #{imgSuffix,jdbcType=VARCHAR},
+      IMG_REMARK = #{imgRemark,jdbcType=VARCHAR},
+      IMG_SIZE = #{imgSize,jdbcType=DECIMAL},
+      IMG_UNIT = #{imgUnit,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      UPDATE_USER_NAME = #{updateUserName,jdbcType=VARCHAR},
+      ADD_DATETIME = #{addDatetime,jdbcType=TIMESTAMP},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      ENABLE = #{enable,jdbcType=DECIMAL},
+      SORT = #{sort,jdbcType=DECIMAL}
+    where FAQ_ID = #{faqId,jdbcType=VARCHAR}
+      and IMG_ID = #{imgId,jdbcType=VARCHAR}
+  </update>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <= #{page.end} ]]>
+    </if>
+  </sql>
+  <sql id="Example_No_Where_Clause" >
+    <foreach collection="oredCriteria" item="criteria" separator="or" >
+      <if test="criteria.valid" >
+        <trim prefix="(" suffix=")" prefixOverrides="and" >
+          <foreach collection="criteria.criteria" item="criterion" >
+            <choose >
+              <when test="criterion.noValue" >
+                and ${criterion.condition}
+              </when>
+              <when test="criterion.singleValue" >
+                and ${criterion.condition} #{criterion.value}
+              </when>
+              <when test="criterion.betweenValue" >
+                and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+              </when>
+              <when test="criterion.listValue" >
+                and ${criterion.condition}
+                <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  #{listItem}
+                </foreach>
+              </when>
+            </choose>
+          </foreach>
+        </trim>
+      </if>
+    </foreach>
+  </sql>
+  <!-- ********************************* user self modify business by JiangWei  -->
+  <select id="selectTreegirdByExample" resultMap="BaseResultMap" parameterType="com.uwen.ur.model.pojo.sys.UrFaqImgRelExample" >
+    select distinct 
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_IMG_REL start with
+    <if test="_parameter != null" >
+      <include refid="Example_No_Where_Clause" />
+    </if>
+    CONNECT BY PRIOR fk_pid = pk_id
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

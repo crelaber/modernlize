@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uwen.ur.model.dal.sys.ext.UrFaqTypeExtMapper" >
+  <resultMap id="BaseResultMap" type="com.uwen.ur.model.pojo.sys.ext.UrFaqTypeExt" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="FAQ_TYPE_CODE" property="faqTypeCode" jdbcType="VARCHAR" />
+    <result column="FAQ_TYPE_NAME" property="faqTypeName" jdbcType="VARCHAR" />
+    <result column="FAQ_TYPE_NAME" property="text" jdbcType="VARCHAR"/>
+    <result column="FAQ_TYPE_DESC" property="faqTypeDesc" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="ADD_DATETIME" property="addDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="ENABLE" property="enable" jdbcType="DECIMAL" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FAQ_TYPE_CODE, FAQ_TYPE_NAME, FAQ_TYPE_DESC, PARENT_ID, CREATE_USER_ID, CREATE_USER_NAME, 
+    UPDATE_USER_ID, UPDATE_USER_NAME, ADD_DATETIME, UPDATE_DATETIME, ENABLE, SORT
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap"  >
+    select distinct 
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_TYPE where ENABLE=1
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.uwen.ur.model.pojo.sys.UrFaqTypeExample" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_TYPE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_TYPE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_UR_FAQ_TYPE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insertBatch"  parameterType="java.util.List">
+    insert into T_UR_FAQ_TYPE (ID, FAQ_TYPE_CODE, FAQ_TYPE_NAME, 
+       PARENT_ID, CREATE_USER_ID, CREATE_USER_NAME,ADD_DATETIME)
+      select A.* from 
+	  (<foreach collection="list" item="item" index="index" separator="UNION">
+	  select #{item.id,jdbcType=VARCHAR} aa , #{item.faqTypeCode,jdbcType=VARCHAR} bb, #{item.faqTypeName,jdbcType=VARCHAR} cc, 
+      #{item.parentId,jdbcType=VARCHAR} ee, #{item.createUserId,jdbcType=VARCHAR} ff, #{item.createUserName,jdbcType=VARCHAR} gg, 
+      #{item.addDatetime,jdbcType=TIMESTAMP} jj from dual 
+	  </foreach>) A
+	  
+   </insert>
+  
+  <update id="batchLogicDeleteByPrimaryKey" parameterType="com.uwen.ur.model.pojo.sys.UrFaqType">
+    update T_UR_FAQ_TYPE 
+    <set >
+      <if test="enable != null" >
+        ENABLE = #{enable,jdbcType=DECIMAL},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID=#{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+       UPDATE_USER_NAME= #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+       UPDATE_DATETIME= #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      </set>
+     where ID in(
+      select ID from T_UR_FAQ_TYPE
+      start with ID=#{id,jdbcType=VARCHAR}
+      connect by prior ID=PARENT_ID)
+  </update>
+  
+  <delete id="deleteByExample" parameterType="com.uwen.ur.model.pojo.sys.UrFaqTypeExample" >
+    delete from T_UR_FAQ_TYPE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uwen.ur.model.pojo.sys.UrFaqType" >
+    insert into T_UR_FAQ_TYPE (ID, FAQ_TYPE_CODE, FAQ_TYPE_NAME, 
+      FAQ_TYPE_DESC, PARENT_ID, CREATE_USER_ID, 
+      CREATE_USER_NAME, UPDATE_USER_ID, UPDATE_USER_NAME, 
+      ADD_DATETIME, UPDATE_DATETIME, ENABLE, 
+      SORT)
+    values (#{id,jdbcType=VARCHAR}, #{faqTypeCode,jdbcType=VARCHAR}, #{faqTypeName,jdbcType=VARCHAR}, 
+      #{faqTypeDesc,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{updateUserId,jdbcType=VARCHAR}, #{updateUserName,jdbcType=VARCHAR}, 
+      #{addDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, #{enable,jdbcType=DECIMAL}, 
+      #{sort,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uwen.ur.model.pojo.sys.ext.UrFaqTypeExt" >
+    insert into T_UR_FAQ_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="faqTypeCode != null" >
+        FAQ_TYPE_CODE,
+      </if>
+      <if test="faqTypeName != null" >
+        FAQ_TYPE_NAME,
+      </if>
+      <if test="faqTypeDesc != null" >
+        FAQ_TYPE_DESC,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createUserName != null" >
+        CREATE_USER_NAME,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="updateUserName != null" >
+        UPDATE_USER_NAME,
+      </if>
+      <if test="addDatetime != null" >
+        ADD_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="enable != null" >
+        ENABLE,
+      </if>
+      <if test="sort != null" >
+        SORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="faqTypeCode != null" >
+        #{faqTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="faqTypeName != null" >
+        #{faqTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="faqTypeDesc != null" >
+        #{faqTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="addDatetime != null" >
+        #{addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uwen.ur.model.pojo.sys.UrFaqTypeExample" resultType="java.lang.Integer" >
+    select count(*) from T_UR_FAQ_TYPE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_UR_FAQ_TYPE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faqTypeCode != null" >
+        FAQ_TYPE_CODE = #{record.faqTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faqTypeName != null" >
+        FAQ_TYPE_NAME = #{record.faqTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faqTypeDesc != null" >
+        FAQ_TYPE_DESC = #{record.faqTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserId != null" >
+        CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserName != null" >
+        CREATE_USER_NAME = #{record.createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserId != null" >
+        UPDATE_USER_ID = #{record.updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserName != null" >
+        UPDATE_USER_NAME = #{record.updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addDatetime != null" >
+        ADD_DATETIME = #{record.addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enable != null" >
+        ENABLE = #{record.enable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_UR_FAQ_TYPE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      FAQ_TYPE_CODE = #{record.faqTypeCode,jdbcType=VARCHAR},
+      FAQ_TYPE_NAME = #{record.faqTypeName,jdbcType=VARCHAR},
+      FAQ_TYPE_DESC = #{record.faqTypeDesc,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      CREATE_USER_NAME = #{record.createUserName,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{record.updateUserId,jdbcType=VARCHAR},
+      UPDATE_USER_NAME = #{record.updateUserName,jdbcType=VARCHAR},
+      ADD_DATETIME = #{record.addDatetime,jdbcType=TIMESTAMP},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      ENABLE = #{record.enable,jdbcType=DECIMAL},
+      SORT = #{record.sort,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uwen.ur.model.pojo.sys.ext.UrFaqTypeExt" >
+    update T_UR_FAQ_TYPE
+    <set >
+      <if test="faqTypeCode != null" >
+        FAQ_TYPE_CODE = #{faqTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="faqTypeName != null" >
+        FAQ_TYPE_NAME = #{faqTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="faqTypeDesc != null" >
+        FAQ_TYPE_DESC = #{faqTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        UPDATE_USER_NAME = #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="addDatetime != null" >
+        ADD_DATETIME = #{addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        ENABLE = #{enable,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        SORT = #{sort,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uwen.ur.model.pojo.sys.UrFaqType" >
+    update T_UR_FAQ_TYPE
+    set FAQ_TYPE_CODE = #{faqTypeCode,jdbcType=VARCHAR},
+      FAQ_TYPE_NAME = #{faqTypeName,jdbcType=VARCHAR},
+      FAQ_TYPE_DESC = #{faqTypeDesc,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      UPDATE_USER_NAME = #{updateUserName,jdbcType=VARCHAR},
+      ADD_DATETIME = #{addDatetime,jdbcType=TIMESTAMP},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      ENABLE = #{enable,jdbcType=DECIMAL},
+      SORT = #{sort,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <= #{page.end} ]]>
+    </if>
+  </sql>
+  <sql id="Example_No_Where_Clause" >
+    <foreach collection="oredCriteria" item="criteria" separator="or" >
+      <if test="criteria.valid" >
+        <trim prefix="(" suffix=")" prefixOverrides="and" >
+          <foreach collection="criteria.criteria" item="criterion" >
+            <choose >
+              <when test="criterion.noValue" >
+                and ${criterion.condition}
+              </when>
+              <when test="criterion.singleValue" >
+                and ${criterion.condition} #{criterion.value}
+              </when>
+              <when test="criterion.betweenValue" >
+                and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+              </when>
+              <when test="criterion.listValue" >
+                and ${criterion.condition}
+                <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  #{listItem}
+                </foreach>
+              </when>
+            </choose>
+          </foreach>
+        </trim>
+      </if>
+    </foreach>
+  </sql>
+  <!-- ********************************* user self modify business by JiangWei  -->
+  <select id="selectTreegirdByExample" resultMap="BaseResultMap" parameterType="com.uwen.ur.model.pojo.sys.UrFaqTypeExample" >
+    select distinct 
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_TYPE start with
+    <if test="_parameter != null" >
+      <include refid="Example_No_Where_Clause" />
+    </if>
+    CONNECT BY PRIOR fk_pid = pk_id
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

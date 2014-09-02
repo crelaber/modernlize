@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uwen.ur.model.dal.sys.UrFaqInterestMapper" >
+  <resultMap id="BaseResultMap" type="com.uwen.ur.model.pojo.sys.UrFaqInterest" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="FAQ_CODE" property="faqCode" jdbcType="VARCHAR" />
+    <result column="QUESTION" property="question" jdbcType="VARCHAR" />
+    <result column="ANSWER" property="answer" jdbcType="VARCHAR" />
+    <result column="ANSWER_TYPE" property="answerType" jdbcType="DECIMAL" />
+    <result column="PICTURE_PATH_LAST" property="picturePathLast" jdbcType="VARCHAR" />
+    <result column="PICTURE_PATH_ANY" property="picturePathAny" jdbcType="VARCHAR" />
+    <result column="FAQ_FILE_URL_ANY" property="faqFileUrlAny" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR" />
+    <result column="FAQ_TYPE_ID" property="faqTypeId" jdbcType="VARCHAR" />
+    <result column="CLICK_NUM" property="clickNum" jdbcType="DECIMAL" />
+    <result column="PRAISE_NUM" property="praiseNum" jdbcType="DECIMAL" />
+    <result column="DEBASE_NUM" property="debaseNum" jdbcType="DECIMAL" />
+    <result column="FAV_NUM" property="favNum" jdbcType="DECIMAL" />
+    <result column="ADD_DATETIME" property="addDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="EFFECT_DATETIME" property="effectDatetime" jdbcType="TIMESTAMP" />
+    <result column="INVALID_DATETIME" property="invalidDatetime" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATE_DATETIME" property="lastUpdateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="ENABLE" property="enable" jdbcType="DECIMAL" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FAQ_CODE, QUESTION, ANSWER, ANSWER_TYPE, PICTURE_PATH_LAST, PICTURE_PATH_ANY, 
+    FAQ_FILE_URL_ANY, CREATE_USER_ID, CREATE_USER_NAME, FAQ_TYPE_ID, CLICK_NUM, PRAISE_NUM, 
+    DEBASE_NUM, FAV_NUM, ADD_DATETIME, UPDATE_DATETIME, EFFECT_DATETIME, INVALID_DATETIME, 
+    LAST_UPDATE_DATETIME, UPDATE_USER_ID, UPDATE_USER_NAME, ENABLE, SORT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.uwen.ur.model.pojo.sys.UrFaqInterestExample" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_INTEREST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_INTEREST
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_UR_FAQ_INTEREST
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uwen.ur.model.pojo.sys.UrFaqInterestExample" >
+    delete from T_UR_FAQ_INTEREST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uwen.ur.model.pojo.sys.UrFaqInterest" >
+    insert into T_UR_FAQ_INTEREST (ID, FAQ_CODE, QUESTION, 
+      ANSWER, ANSWER_TYPE, PICTURE_PATH_LAST, 
+      PICTURE_PATH_ANY, FAQ_FILE_URL_ANY, CREATE_USER_ID, 
+      CREATE_USER_NAME, FAQ_TYPE_ID, CLICK_NUM, 
+      PRAISE_NUM, DEBASE_NUM, FAV_NUM, 
+      ADD_DATETIME, UPDATE_DATETIME, EFFECT_DATETIME, 
+      INVALID_DATETIME, LAST_UPDATE_DATETIME, 
+      UPDATE_USER_ID, UPDATE_USER_NAME, ENABLE, 
+      SORT)
+    values (#{id,jdbcType=VARCHAR}, #{faqCode,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{answerType,jdbcType=DECIMAL}, #{picturePathLast,jdbcType=VARCHAR}, 
+      #{picturePathAny,jdbcType=VARCHAR}, #{faqFileUrlAny,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{faqTypeId,jdbcType=VARCHAR}, #{clickNum,jdbcType=DECIMAL}, 
+      #{praiseNum,jdbcType=DECIMAL}, #{debaseNum,jdbcType=DECIMAL}, #{favNum,jdbcType=DECIMAL}, 
+      #{addDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, #{effectDatetime,jdbcType=TIMESTAMP}, 
+      #{invalidDatetime,jdbcType=TIMESTAMP}, #{lastUpdateDatetime,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateUserName,jdbcType=VARCHAR}, #{enable,jdbcType=DECIMAL}, 
+      #{sort,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uwen.ur.model.pojo.sys.UrFaqInterest" >
+    insert into T_UR_FAQ_INTEREST
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="faqCode != null" >
+        FAQ_CODE,
+      </if>
+      <if test="question != null" >
+        QUESTION,
+      </if>
+      <if test="answer != null" >
+        ANSWER,
+      </if>
+      <if test="answerType != null" >
+        ANSWER_TYPE,
+      </if>
+      <if test="picturePathLast != null" >
+        PICTURE_PATH_LAST,
+      </if>
+      <if test="picturePathAny != null" >
+        PICTURE_PATH_ANY,
+      </if>
+      <if test="faqFileUrlAny != null" >
+        FAQ_FILE_URL_ANY,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createUserName != null" >
+        CREATE_USER_NAME,
+      </if>
+      <if test="faqTypeId != null" >
+        FAQ_TYPE_ID,
+      </if>
+      <if test="clickNum != null" >
+        CLICK_NUM,
+      </if>
+      <if test="praiseNum != null" >
+        PRAISE_NUM,
+      </if>
+      <if test="debaseNum != null" >
+        DEBASE_NUM,
+      </if>
+      <if test="favNum != null" >
+        FAV_NUM,
+      </if>
+      <if test="addDatetime != null" >
+        ADD_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="effectDatetime != null" >
+        EFFECT_DATETIME,
+      </if>
+      <if test="invalidDatetime != null" >
+        INVALID_DATETIME,
+      </if>
+      <if test="lastUpdateDatetime != null" >
+        LAST_UPDATE_DATETIME,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="updateUserName != null" >
+        UPDATE_USER_NAME,
+      </if>
+      <if test="enable != null" >
+        ENABLE,
+      </if>
+      <if test="sort != null" >
+        SORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="faqCode != null" >
+        #{faqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="answerType != null" >
+        #{answerType,jdbcType=DECIMAL},
+      </if>
+      <if test="picturePathLast != null" >
+        #{picturePathLast,jdbcType=VARCHAR},
+      </if>
+      <if test="picturePathAny != null" >
+        #{picturePathAny,jdbcType=VARCHAR},
+      </if>
+      <if test="faqFileUrlAny != null" >
+        #{faqFileUrlAny,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="faqTypeId != null" >
+        #{faqTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNum != null" >
+        #{clickNum,jdbcType=DECIMAL},
+      </if>
+      <if test="praiseNum != null" >
+        #{praiseNum,jdbcType=DECIMAL},
+      </if>
+      <if test="debaseNum != null" >
+        #{debaseNum,jdbcType=DECIMAL},
+      </if>
+      <if test="favNum != null" >
+        #{favNum,jdbcType=DECIMAL},
+      </if>
+      <if test="addDatetime != null" >
+        #{addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectDatetime != null" >
+        #{effectDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidDatetime != null" >
+        #{invalidDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDatetime != null" >
+        #{lastUpdateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uwen.ur.model.pojo.sys.UrFaqInterestExample" resultType="java.lang.Integer" >
+    select count(*) from T_UR_FAQ_INTEREST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_UR_FAQ_INTEREST
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faqCode != null" >
+        FAQ_CODE = #{record.faqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question != null" >
+        QUESTION = #{record.question,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answer != null" >
+        ANSWER = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answerType != null" >
+        ANSWER_TYPE = #{record.answerType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.picturePathLast != null" >
+        PICTURE_PATH_LAST = #{record.picturePathLast,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picturePathAny != null" >
+        PICTURE_PATH_ANY = #{record.picturePathAny,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faqFileUrlAny != null" >
+        FAQ_FILE_URL_ANY = #{record.faqFileUrlAny,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserId != null" >
+        CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserName != null" >
+        CREATE_USER_NAME = #{record.createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faqTypeId != null" >
+        FAQ_TYPE_ID = #{record.faqTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clickNum != null" >
+        CLICK_NUM = #{record.clickNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.praiseNum != null" >
+        PRAISE_NUM = #{record.praiseNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.debaseNum != null" >
+        DEBASE_NUM = #{record.debaseNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.favNum != null" >
+        FAV_NUM = #{record.favNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addDatetime != null" >
+        ADD_DATETIME = #{record.addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.effectDatetime != null" >
+        EFFECT_DATETIME = #{record.effectDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.invalidDatetime != null" >
+        INVALID_DATETIME = #{record.invalidDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateDatetime != null" >
+        LAST_UPDATE_DATETIME = #{record.lastUpdateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUserId != null" >
+        UPDATE_USER_ID = #{record.updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserName != null" >
+        UPDATE_USER_NAME = #{record.updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enable != null" >
+        ENABLE = #{record.enable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_UR_FAQ_INTEREST
+    set ID = #{record.id,jdbcType=VARCHAR},
+      FAQ_CODE = #{record.faqCode,jdbcType=VARCHAR},
+      QUESTION = #{record.question,jdbcType=VARCHAR},
+      ANSWER = #{record.answer,jdbcType=VARCHAR},
+      ANSWER_TYPE = #{record.answerType,jdbcType=DECIMAL},
+      PICTURE_PATH_LAST = #{record.picturePathLast,jdbcType=VARCHAR},
+      PICTURE_PATH_ANY = #{record.picturePathAny,jdbcType=VARCHAR},
+      FAQ_FILE_URL_ANY = #{record.faqFileUrlAny,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      CREATE_USER_NAME = #{record.createUserName,jdbcType=VARCHAR},
+      FAQ_TYPE_ID = #{record.faqTypeId,jdbcType=VARCHAR},
+      CLICK_NUM = #{record.clickNum,jdbcType=DECIMAL},
+      PRAISE_NUM = #{record.praiseNum,jdbcType=DECIMAL},
+      DEBASE_NUM = #{record.debaseNum,jdbcType=DECIMAL},
+      FAV_NUM = #{record.favNum,jdbcType=DECIMAL},
+      ADD_DATETIME = #{record.addDatetime,jdbcType=TIMESTAMP},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      EFFECT_DATETIME = #{record.effectDatetime,jdbcType=TIMESTAMP},
+      INVALID_DATETIME = #{record.invalidDatetime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_DATETIME = #{record.lastUpdateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER_ID = #{record.updateUserId,jdbcType=VARCHAR},
+      UPDATE_USER_NAME = #{record.updateUserName,jdbcType=VARCHAR},
+      ENABLE = #{record.enable,jdbcType=DECIMAL},
+      SORT = #{record.sort,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uwen.ur.model.pojo.sys.UrFaqInterest" >
+    update T_UR_FAQ_INTEREST
+    <set >
+      <if test="faqCode != null" >
+        FAQ_CODE = #{faqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        QUESTION = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        ANSWER = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="answerType != null" >
+        ANSWER_TYPE = #{answerType,jdbcType=DECIMAL},
+      </if>
+      <if test="picturePathLast != null" >
+        PICTURE_PATH_LAST = #{picturePathLast,jdbcType=VARCHAR},
+      </if>
+      <if test="picturePathAny != null" >
+        PICTURE_PATH_ANY = #{picturePathAny,jdbcType=VARCHAR},
+      </if>
+      <if test="faqFileUrlAny != null" >
+        FAQ_FILE_URL_ANY = #{faqFileUrlAny,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="faqTypeId != null" >
+        FAQ_TYPE_ID = #{faqTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNum != null" >
+        CLICK_NUM = #{clickNum,jdbcType=DECIMAL},
+      </if>
+      <if test="praiseNum != null" >
+        PRAISE_NUM = #{praiseNum,jdbcType=DECIMAL},
+      </if>
+      <if test="debaseNum != null" >
+        DEBASE_NUM = #{debaseNum,jdbcType=DECIMAL},
+      </if>
+      <if test="favNum != null" >
+        FAV_NUM = #{favNum,jdbcType=DECIMAL},
+      </if>
+      <if test="addDatetime != null" >
+        ADD_DATETIME = #{addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectDatetime != null" >
+        EFFECT_DATETIME = #{effectDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidDatetime != null" >
+        INVALID_DATETIME = #{invalidDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDatetime != null" >
+        LAST_UPDATE_DATETIME = #{lastUpdateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        UPDATE_USER_NAME = #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        ENABLE = #{enable,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        SORT = #{sort,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uwen.ur.model.pojo.sys.UrFaqInterest" >
+    update T_UR_FAQ_INTEREST
+    set FAQ_CODE = #{faqCode,jdbcType=VARCHAR},
+      QUESTION = #{question,jdbcType=VARCHAR},
+      ANSWER = #{answer,jdbcType=VARCHAR},
+      ANSWER_TYPE = #{answerType,jdbcType=DECIMAL},
+      PICTURE_PATH_LAST = #{picturePathLast,jdbcType=VARCHAR},
+      PICTURE_PATH_ANY = #{picturePathAny,jdbcType=VARCHAR},
+      FAQ_FILE_URL_ANY = #{faqFileUrlAny,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      FAQ_TYPE_ID = #{faqTypeId,jdbcType=VARCHAR},
+      CLICK_NUM = #{clickNum,jdbcType=DECIMAL},
+      PRAISE_NUM = #{praiseNum,jdbcType=DECIMAL},
+      DEBASE_NUM = #{debaseNum,jdbcType=DECIMAL},
+      FAV_NUM = #{favNum,jdbcType=DECIMAL},
+      ADD_DATETIME = #{addDatetime,jdbcType=TIMESTAMP},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      EFFECT_DATETIME = #{effectDatetime,jdbcType=TIMESTAMP},
+      INVALID_DATETIME = #{invalidDatetime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_DATETIME = #{lastUpdateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      UPDATE_USER_NAME = #{updateUserName,jdbcType=VARCHAR},
+      ENABLE = #{enable,jdbcType=DECIMAL},
+      SORT = #{sort,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <= #{page.end} ]]>
+    </if>
+  </sql>
+  <sql id="Example_No_Where_Clause" >
+    <foreach collection="oredCriteria" item="criteria" separator="or" >
+      <if test="criteria.valid" >
+        <trim prefix="(" suffix=")" prefixOverrides="and" >
+          <foreach collection="criteria.criteria" item="criterion" >
+            <choose >
+              <when test="criterion.noValue" >
+                and ${criterion.condition}
+              </when>
+              <when test="criterion.singleValue" >
+                and ${criterion.condition} #{criterion.value}
+              </when>
+              <when test="criterion.betweenValue" >
+                and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+              </when>
+              <when test="criterion.listValue" >
+                and ${criterion.condition}
+                <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  #{listItem}
+                </foreach>
+              </when>
+            </choose>
+          </foreach>
+        </trim>
+      </if>
+    </foreach>
+  </sql>
+  <!-- ********************************* user self modify business by JiangWei  -->
+  <select id="selectTreegirdByExample" resultMap="BaseResultMap" parameterType="com.uwen.ur.model.pojo.sys.UrFaqInterestExample" >
+    select distinct 
+    <include refid="Base_Column_List" />
+    from T_UR_FAQ_INTEREST start with
+    <if test="_parameter != null" >
+      <include refid="Example_No_Where_Clause" />
+    </if>
+    CONNECT BY PRIOR fk_pid = pk_id
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

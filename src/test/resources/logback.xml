@@ -1,0 +1,83 @@
+﻿<configuration>
+	<!-- 控制台输出 -->
+	<appender name="stdout"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<Encoding>UTF-8</Encoding>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>
+				%-5level - %msg %date [%thread]  %logger{50}%n
+			</pattern>
+		</layout>
+	</appender>
+	
+	<!-- 所有日志输出到这里 -->
+	<appender name="twdpe"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 指定输出文件路径、序号 -->
+		<File>./log/twdpe.log</File>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>./log/twdpe.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+		<!-- 指定输出文件大小 -->
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+		<!-- 指定输出格式 -->
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%date [%thread] %-5level %logger{80} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+	
+	<!-- 所有错误日志输出到这里 -->
+	<appender name="twdpe-error"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>		
+		<!-- 指定输出文件路径、序号 -->
+		<File>./log/twdpe-error.log</File>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>./log/twdpe-error.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+		<!-- 指定输出文件大小 -->
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+		<!-- 指定输出格式 -->
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%date [%thread] %-5level %logger{80} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+	
+    <!-- 
+	<logger name="control" level="debug" additivity="false">
+		<appender-ref ref="stdout" />
+	</logger>
+    
+	<logger name="control2" level="ERROR" additivity="false">
+		<appender-ref ref="stdout" />
+	</logger>
+    -->
+     
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="twdpe" />
+		<appender-ref ref="twdpe-error" />	
+		<appender-ref ref="stdout" />			
+	</root>
+
+</configuration>

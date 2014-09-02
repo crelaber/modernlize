@@ -1,0 +1,6 @@
+.main_p3 li{float:left;}
+.m_left{width:215px;height:100%;}
+.m_center{width:745px;height:100%;}
+.m_left .left_p1 .left_top{ width:205px; height:44px; background: url(../images/left_p1bg1.png) top left no-repeat;}
+.m_left .left_p1 .left_mid{ width:205px; background:#FFFFCC; background: url(../images/left_p1bg2.png) top left repeat; min-height:100px;}
+.m_left .left_p1 .left_bot{ width:205px; height:6px; background:#00FFFF; background: url(../images/left_p1bg3.png)  bottom left no-repeat;}

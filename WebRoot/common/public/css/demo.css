@@ -1,0 +1,33 @@
+*{
+	font-size:12px;
+}
+body {
+    font-family:helvetica,tahoma,verdana,sans-serif;
+    font-size:13px;
+    margin:0;
+}
+h2 {
+    font-size:18px;
+    font-weight:bold;
+    margin:0;
+    margin-bottom:15px;
+}
+.demo-info{
+	background:#FFFEE6;
+	color:#8F5700;
+	padding:12px;
+}
+.demo-tip{
+	width:16px;
+	height:16px;
+	margin-right:8px;
+	float:left;
+}
+
+.edit_input{width: 250px;}
+.edit_combobox{width: 250px;}
+.edit_textarea{width: 85%; height: 125px;}
+
+.adv_img_wrap{padding: 5px; position: relative; border: solid 5px #fff;}
+.adv_img_wrap:hover{background: #FF9999;}
+.adv_img_wrap_hover{background: #FF9999;}

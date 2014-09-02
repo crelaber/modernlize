@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mycar.model.dal.sys.ext.BusiQuery">
+	<resultMap id="BaseResultMap" type="com.mycar.model.pojo.sys.ViewAreaSuppCount">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="pid" property="pid" jdbcType="VARCHAR" />
+		<result column="area_name" property="areaName" jdbcType="VARCHAR" />
+		<result column="search_num" property="searchNum" jdbcType="INTEGER" />
+		<result column="click_num" property="clickNum" jdbcType="INTEGER" />
+		<result column="add_datetime" property="addDatetime" jdbcType="TIMESTAMP" />
+		<result column="update_datetime" property="updateDatetime"
+			jdbcType="TIMESTAMP" />
+		<result column="sort" property="sort" jdbcType="INTEGER" />
+		<result column="enable" property="enable" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.mycar.model.dal.sys.ext.BusiQuery$AreaParam">
+		select area.*,IFNULL(countArea.acount,0) as gcount  from Gsys_Area area 
+		left join
+		(SELECT count(*) as acount,supp.area_id FROM db_gsoo.Gsys_Supplyer supp 
+		where supp.search_keyword like #{skeyword} 
+		<if test="typeId != null">
+		and supp.type_id = #{typeId}
+		</if>
+		<if test="typeIds != null">
+		and supp.type_id in 
+			<foreach collection="typeIds" item="listItem" open="(" close=")" separator="," >
+               #{listItem}
+            </foreach>
+		</if>
+		group by area_id) as countArea
+		on countArea.area_id = area.id
+		where area.pid = #{areaPid}
+	</select>
+</mapper>

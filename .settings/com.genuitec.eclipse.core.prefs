@@ -1,0 +1,4 @@
+#Thu Jun 13 17:33:55 CST 2013
+eclipse.preferences.version=1
+validator.Checked=WebRoot/js/jquery-1.8.0.min.js,WebRoot/admin/js/jquery-1.8.0.min.js,WebRoot/js/galleria/galleria.js
+validator.Unchecked=

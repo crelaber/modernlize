@@ -1,0 +1,27 @@
+/**************************本项目一些开发规范建议*****************************************/
+1、包名以域com+talkweb+本项目名称命名，再就是分为了前台action和后台service及公共common,最后根据
+       模块在action和service下细分，比如com.talkweb.dzbx.service.cert(单据模块)；
+   com.talkweb.dzbx.service.payment(付款模块);再在每个模块下建pojo、dal、service三个包，dal下
+      分接口(类)和impl(包)，service下也分接口(类)和impl(包);
+      
+2、pojo目录下的命名以Info结尾；dal层下的接口以 I 开头 Dao结尾； impl下面 去掉接口的I 以Impl结尾；
+       增方法 add开头；物理删除 delete开头； 逻辑删除 modify开头；修改 update开头；查询单一对象 get开头
+       查询多行 find开头；
+       
+3、对数据库操作的文件统一放在config/sqlmap下面；并且命名以 模块名.sql.xml的方式命名；交给spring
+       托管的service和action统一放在config/beans下，并且service的命名以模块名.service.xml的方式命名，
+   action的以模块名.action.xml命名
+   
+4、对pojo的域及重要方法写注释，如果要修改别人的类或方法，在类或方法修改地方写好修改人姓名、日期及
+       修改原因；例如：modify by wuzhiyun for xxx 2012-5-08, 增加部分代码，例如
+   add by wuzhiyun for xxx 2012-5-08
+       
+5、欢迎亲们补充和提建议
+/*****************************************************************************************/
+
+<li class="shopname"> <a href="/shop/1795441" class="BL" title="上海海洋水族馆" onclick="document.hippo.ext({cl_i:1,query_id:'508e9ec7-c4ad-4220-bf5f-bf76e779e2d6'}).mv('cl_to_s',1795441);pageTracker._trackPageview('dp_search_shopname_shanghai');document.hippo.ext({index:'1',action:'click',type:'shop',content:'/shop/1795441',title:'上海海洋水族馆'}).mv('module','5_shopresult_0');" target="_blank">上海海洋水族馆</a> </li>
+<li class="address"><strong>地址:</strong><a href="/search/category/1/0/r5" class="Black-H">浦东新区</a>陆家嘴环路1388号&nbsp;&nbsp;58778988</li>  
+<li class="tags"><strong>标签:</strong><a href="/search/category/1/30/g26490" class="Gray" onclick="pageTracker._trackPageview('dp_search_snippet_tag_shanghai')">更多<span class="Color4">休闲娱乐</span></a>&nbsp;&nbsp;<a href="/search/category/1/30/g139" class="Gray" onclick="pageTracker._trackPageview('dp_search_snippet_tag_shanghai')">景点/郊游</a>&nbsp;&nbsp;<a href="/search/category/1/0/r801" class="Gray" onclick="pageTracker._trackPageview('dp_search_snippet_tag_shanghai')">陆家嘴</a></li>
+
+${obj['suppName'] }
+<s:property value="%{@com.uwen.upic.util.JUtil@substr(#obj['suppName'], 25,'..')}"/>
